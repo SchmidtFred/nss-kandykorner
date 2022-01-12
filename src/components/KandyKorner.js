@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from "react";
-import { LocationList } from "./locations/LocationList";
-import { ProductList } from "./products/ProductList";
-
+import React from "react";
+import { NavBar } from "./nav/NavBar";
+import { ApplicationViews } from "./ApplicationViews";
 export const KandyKorner = () => {
 
     return (
         <>
+        <NavBar />
         <h1>KandyKorner</h1>
-        <LocationList />
-        <ProductList />
+        <ApplicationViews />
         </>
     )
 }
