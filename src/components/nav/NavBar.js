@@ -26,6 +26,10 @@ export const NavBar = () => {
             </li>
 
             <li className="navbar__item active">
+                <Link className="navbar__link" to='/inventory'>Inventory Search</Link>
+            </li>
+
+            <li className="navbar__item active">
                 <Link className="navbar__link" to="#" onClick={() => localStorage.removeItem("kandy_customer")}>Logout</Link>
             </li>
         </ul>
