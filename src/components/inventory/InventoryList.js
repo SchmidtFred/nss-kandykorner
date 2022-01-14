@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllProducts } from "../ApiManager";
 
-export const ProductList = () => {
+export const InventoryList = (props) => {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = () => {
@@ -11,7 +11,13 @@ export const ProductList = () => {
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [props.searchText]);
+
+    //will filter the producst array with our search terms and return the new filtered array
+    const searchProducts = (array) => {
+        const searchTerms = props.searchText.toLowerCase();
+        return array.filter(product => product.name.toLowerCase().startsWith(searchTerms));
+    }
 
     const addPurchase = (event) => {
         const newPurchase = {
@@ -33,10 +39,14 @@ export const ProductList = () => {
 
     return (
         <>
-        <h1>Products</h1>
-        {
-            products.map(product => <div key={`productList--${product.id}`}>{product.name} - {product.productType.type}: ${product.price} <button className="btn primary-btn" value={product.id} onClick={ addPurchase } >Purchase</button></div>)
-        }
+            <h1>Search Results</h1>
+            {
+                searchProducts(products).map(product => {
+                    return <div key={`productList--${product.id}`}>
+                        {product.name} - {product.productType.type}: ${product.price}
+                        <button className="btn primary-btn" value={product.id} onClick={ addPurchase } >Purchase</button></div>
+                })
+            }
         </>
     )
 }
